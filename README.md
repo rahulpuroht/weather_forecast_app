@@ -1,7 +1,7 @@
 Weather Forecaster Application (Ruby on Rails)
 
 Overview
-This Ruby on Rails application provides weather forecasts based on user-inputted addresses. It integrates external APIs, follows Test-Driven Development (TDD) principles, and implements caching for efficient performance.
+This Ruby on Rails application provides weather forecasts based on user-inputted addresses. It integrates external APIs and implements caching for efficient performance.
 
 Requirements:
   Must be done in Ruby on Rails
