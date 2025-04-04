@@ -60,4 +60,11 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+  gem "rails-controller-testing"
+  gem "webmock"
 end
+# Added for Lat long Support
+gem "geocoder"
+# For HTTP calling external apis
+gem "faraday"
+gem "faraday_middleware"

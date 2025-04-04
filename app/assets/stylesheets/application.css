@@ -8,3 +8,88 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+ body {
+    background: linear-gradient(to bottom, #bae3ff, #78aaff);
+    color: black;
+    font-family: "San Francisco", Arial, sans-serif;
+  }
+  .glass-container {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(15px);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    animation: fadeIn 1s ease-in-out;
+  }
+  .header {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    padding: 20px;
+    color: black;
+  }
+  .weather-icon {
+    font-size: 50px;
+    color: #007aff;
+  }
+  .forecast-item, .hourly-box {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    padding: 8px;
+    transition: 0.3s;
+    text-align: center;
+    flex: 1;
+    font-size: 14px;
+  }
+  .forecast-item:hover, .hourly-box:hover {
+    transform: scale(1.05);
+  }
+  .weekly-forecast {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding-bottom: 10px;
+  }
+  .forecast-item {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3px;
+    align-items: center;
+    padding: 5px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    text-align: center;
+    width: 100%;
+  }
+  .hourly-forecast {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+  }
+  .air-conditions {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .air-conditions p {
+    flex: 1;
+    min-width: 50%;
+    text-align: center;
+  }
+  .error-popup {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: red;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: none;
+    z-index: 1000;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
