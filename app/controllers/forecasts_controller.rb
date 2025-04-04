@@ -1,26 +1,35 @@
 class ForecastsController < ApplicationController
+  # Handles the search functionality for weather forecasts.
   def search
-    @query = params[:query]
-    return if @query.nil?
-    if @query.blank? # Validates address string and show message if address string is not valid
-      flash.now[:alert] = "Invalid Address.Enter City or Zipcode"
+    @query = params[:query] # User input for city or zipcode.
+    return if @query.nil? # Exit if no query is provided.
+
+    if @query.blank? # Validates address string and shows a message if invalid.
+      flash.now[:alert] = "Invalid Address. Enter City or Zipcode"
     else
-      # Retrieving data for proper input by user
+      # Retrieves weather data for valid input.
       get_forecast_data
     end
   end
 
   private
 
+  # Retrieves forecast data based on the query.
   def get_forecast_data
     @res = CoordinateService.call(@query)
-    # If in search zipcode is not passed or geocode not able to providethen make key with lat-long
+    # CoordinateService: Converts the query into latitude, longitude, and a zipcode.
+
+    # Creates a cache key using zipcode or latitude-longitude if zipcode is unavailable.
     zipcode = @res[:zip] || "#{@res[:latitude]}--#{@res[:longitude]}"
-    @cache_exist = Rails.cache.exist?(zipcode)
+    @cache_exist = Rails.cache.exist?(zipcode) # Checks if data is already cached.
+
+    # Fetches weather data from cache or calls WeatherService if not cached.
     @weather_data = Rails.cache.fetch(zipcode, expires_in: 30.minutes) do
       WeatherService.call(@res[:latitude], @res[:longitude])
+      # WeatherService: Fetches weather data using latitude and longitude.
     end
   rescue StandardError => e
-    flash.now[:alert] = e.message # Error message if there is any exception
+    # Handles exceptions and displays an error message.
+    flash.now[:alert] = e.message
   end
 end

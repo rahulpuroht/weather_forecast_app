@@ -63,8 +63,12 @@ group :test do
   gem "rails-controller-testing"
   gem "webmock"
 end
-# Added for Lat long Support
+
+# Geocoder is used to perform geocoding and reverse geocoding, converting addresses to coordinates and vice versa.
 gem "geocoder"
-# For HTTP calling external apis
+
+# Faraday is an HTTP client library that provides a simple interface for making HTTP requests.
 gem "faraday"
+
+# Faraday Middleware provides additional functionality for Faraday, such as parsing JSON responses.
 gem "faraday_middleware"
