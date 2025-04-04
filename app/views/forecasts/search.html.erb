@@ -1,2 +1,42 @@
-<h1>Forecasts#search</h1>
-<p>Find me in app/views/forecasts/search.html.erb</p>
+<div class="header">☁️ Live Weather Update</div>
+    <% flash.each do |key, value| %>
+    <div class="alert <%= flash_class(key)%> alert-dismissible fade show" role="alert">
+        <%= value %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+    </div>
+    <% end %>
+  <!-- Search Form -->
+    <%= form_with  method: :get, class: "mb-4 d-flex",id: "weatherForm" do %>
+      <%= text_field_tag :query, nil, class: "form-control", placeholder: "Enter city or ZIP code",id: "queryField" %>
+      <%= submit_tag "Search", class: "btn btn-primary ms-2", name: nil %>
+    <% end %>
+  <%# </div> %>
+  <% if @res.present? %>
+  <div class="glass-container row">
+    <% if @alert %>
+      <div class="notification is-danger is-light text-center">
+        <%= alert %>
+      </div>
+    <% end %>
+     <% if @cache_exist %>
+    <h5 id="cacheInfo" class="text-muted" style="color: green">This result was loaded from cache</h5>
+    <% end %>
+    <div class="col-md-6 text-center">
+      <h2 class="fw-bold"><%= get_city %></h2>
+      <p class="lead"><%= @weather_data["name"] %></p>
+      <%# <i class="fas fa-cloud-sun weather-icon"></i> %>
+      <h3><%= @weather_data["main"]["temp"] %></h3>
+      <p>Humidity: <%= @weather_data["main"]["humidity"] %>% | Wind: <%= @weather_data["wind"]["speed"] %> km/h</p>
+      <p>Min/Max: <%= @weather_data["main"]["temp_min"] %> / <%= @weather_data["main"]["temp_max"] %> </p>
+      <div class="mt-4 p-3 rounded" style="background: rgba(255, 255, 255, 0.3);">
+        <h5>Air Conditions</h5>
+        <div class="air-conditions">
+          <p><i class="fas fa-temperature-high"></i> Real Feel: <%= @weather_data["main"]["feels_like"] %>°C</p>
+          <p><i class="fas fa-wind"></i> Wind: <%= @weather_data["wind"]["speed"] %> km/h</p>
+          <p><i class="fas fa-cloud"></i> Clouds: <%= @weather_data["clouds"]["all"] %>%</p>
+          <p><i class="fas fa-tint"></i> Humidity: <%= @weather_data["main"]["humidity"] %>%</p>
+        </div>
+      </div>
+  </div>
+</div>
+<% end %>
