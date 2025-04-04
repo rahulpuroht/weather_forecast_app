@@ -61,3 +61,13 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+# Added for Lat long Support
+gem "geocoder"
+# For UI
+gem "bootstrap", "~> 5.3.2"
+gem "jquery-rails"
+gem "rails-i18n"
+gem "sassc-rails"
+# For HTTP calling external apis
+gem "faraday"
+gem "faraday_middleware"
